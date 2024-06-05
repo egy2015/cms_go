@@ -2,14 +2,15 @@ run:
 	go run main.go
 
 folder_init:
-	mkdir router
-	mkdir controller
-	mkdir service
-	mkdir repository
-	mkdir model
-	mkdir database
-	mkdir docs
-	mkdir library
+	mkdir -p router
+	mkdir -p controller
+	mkdir -p service
+	mkdir -p repository
+	mkdir -p model
+	mkdir -p database
+	mkdir -p docs
+	mkdir -p library
+	cp .env.example .env
 
 rest_init:
 	@echo "\nInstalling Gin.............."
