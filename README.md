@@ -26,8 +26,6 @@ This manual guides you through setting up the development environment for your G
    make rest_init
    ```
 
-   This command might not exist by default. You might need to create a `Makefile` (discussed later) to define this command and specific tasks.
-
 3. **Generate Folder Structure:**
 
    Run the following command to generate a basic folder structure for your project:
@@ -35,8 +33,6 @@ This manual guides you through setting up the development environment for your G
    ```bash
    make folder_init
    ```
-
-   Similar to `rest_init`, you might need to define this command in a `Makefile`.
 
 **Additional Notes:**
 
