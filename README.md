@@ -18,21 +18,17 @@ This manual guides you through setting up the development environment for your G
 
    This command creates a `go.mod` file in your project directory, which manages dependencies for your project.
 
-2. **Generate REST API Scaffolding:**
-
-   Run the following command to generate boilerplate code for a REST API using the `make` tool:
-
-   ```bash
-   make rest_init
-   ```
-
-3. **Generate Folder Structure:**
+2. **Generate Folder Structure:**
 
    Run the following command to generate a basic folder structure for your project:
 
    ```bash
    make folder_init
    ```
+
+3. **Happy Coding:**
+
+   You can use your own folder structure / base, and you can type `make` and you can see what commands are available to speed up your progress.
 
 **Additional Notes:**
 
