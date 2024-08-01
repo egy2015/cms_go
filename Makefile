@@ -2,22 +2,27 @@
 # Default target: display help
 .DEFAULT_GOAL := help
 
-# Target to initialize project folders
-folder_init:
-	mkdir -p router controller
-	cp -r builder-maker/database database
-	cp -r builder-maker/controller_auth controller
-	cp .env.example .env
-	@echo "Project folders initialized."
-
-run_local:
-	go run main.go
 
 # Define default values for variables
 name ?= customer
 
 # Define a variable to hold the module path
 module_path := $(shell go list -m)
+
+# Target to initialize project folders
+folder_init:
+	cp -r builder-maker/router router
+	cp -r builder-maker/database database
+	cp -r builder-maker/controller/auth controller
+	cp builder-maker/main.go main.go
+	cp .env.example .env
+	$(shell go mod tidy)
+	@sed -i '' 's|Egy2015/cms_go|$(module_path)|g' router/router.go
+	@sed -i '' 's|Egy2015/cms_go|$(module_path)|g' main.go
+	@echo "Project folders initialized."
+
+run_local:
+	go run main.go
 
 # Example target that prints the module path
 show_path:
