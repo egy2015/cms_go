@@ -9,17 +9,44 @@ name ?= customer
 # Define a variable to hold the module path
 module_path := $(shell go list -m)
 
+.PHONY: folder_init clean retry
+
+# Function to retry a command
+define retry
+  @n=0; \
+  until [ $$n -ge 3 ]; do \
+    $(1) && break; \
+    n=$$((n+1)); \
+    echo "Retry $$n for command: $(1)"; \
+    sleep 1; \
+  done; \
+  if [ $$n -ge 3 ]; then \
+    echo "Command failed after 3 attempts: $(1)"; \
+    make clean; \
+    exit 1; \
+  fi
+endef
+
 # Target to initialize project folders
 folder_init:
-	cp -r builder-maker/router router
-	cp -r builder-maker/database database
-	cp -r builder-maker/controller/auth controller
-	cp builder-maker/main.go main.go
-	cp .env.example .env
-	$(shell go mod tidy)
-	@sed -i '' 's|Egy2015/cms_go|$(module_path)|g' router/router.go
-	@sed -i '' 's|Egy2015/cms_go|$(module_path)|g' main.go
+	$(call retry,cp -r builder-maker/router router)
+	$(call retry,cp -r builder-maker/database database)
+	$(call retry,cp -r builder-maker/controller_auth controller)
+	$(call retry,cp builder-maker/main.go main.go)
+	$(call retry,cp .env.example .env)
+	$(call retry,go mod tidy)
+	$(call retry,sed -i '' 's|Egy2015/cms_go|$(module_path)|g' router/router.go)
+	$(call retry,sed -i '' 's|Egy2015/cms_go|$(module_path)|g' main.go)
 	@echo "Project folders initialized."
+
+# Rollback if failed
+clean:
+	rm -rf router
+	rm -rf database
+	rm -rf controller
+	rm -f main.go
+	rm -f .env
+	@echo "Cleaned up initialized folders and files."
 
 run_local:
 	go run main.go
