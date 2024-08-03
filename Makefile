@@ -32,6 +32,7 @@ folder_init:
 	$(call retry,cp -r builder-maker/router router)
 	$(call retry,cp -r builder-maker/database database)
 	$(call retry,cp -r builder-maker/controller_auth controller)
+	$(call retry,cp -r builder-maker/library library)
 	$(call retry,cp builder-maker/main.go main.go)
 	$(call retry,cp .env.example .env)
 	$(call retry,go mod tidy)
@@ -44,6 +45,7 @@ clean:
 	rm -rf router
 	rm -rf database
 	rm -rf controller
+	rm -rf library
 	rm -f main.go
 	rm -f .env
 	@echo "Cleaned up initialized folders and files."
@@ -103,6 +105,8 @@ resource: temp.txt import_controller.txt
 help:
 	@echo "Usage:"
 	@echo ""
-	@echo " - Initialize project folders: make folder_init"
-	@echo " - Run the application: make run_local"
-	@echo " - Create a new route: make resource name=\"[resourcename]\""
+	@echo " - Add necessary folders / init folder:    make folder_init"
+	@echo " - Revert adding init folder:              make clean"
+	@echo " - Run the application:                    make run_local"
+	@echo " - Create a new route:                     make resource name="[resourcename]""
+

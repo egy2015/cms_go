@@ -26,9 +26,17 @@ This manual guides you through setting up the development environment for your G
    make folder_init
    ```
 
-3. **Happy Coding:**
+3. **Adjust .env:**
 
-   You can use your own folder structure / base, and you can type `make` and you can see what commands are available to speed up your progress.
+   Step 2 will add necessary folders to your project, including `.env` files so adjust your `.env` .
+
+4. **Happy Coding:**
+
+   You can use your own folder structure / base, and you can type 
+   ```
+   make
+   ``` 
+   and you can see what commands are available to speed up your progress.
 
 **Additional Notes:**
 
