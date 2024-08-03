@@ -34,7 +34,7 @@ folder_init:
 	$(call retry,cp -r builder-maker/controller_auth controller)
 	$(call retry,cp -r builder-maker/library library)
 	$(call retry,cp builder-maker/main.go main.go)
-	$(call retry,cp .env.example .env)
+	$(call retry,cp builder-maker/.env.example .env)
 	$(call retry,go mod tidy)
 	$(call retry,sed -i '' 's|Egy2015/cms_go|$(module_path)|g' router/router.go)
 	$(call retry,sed -i '' 's|Egy2015/cms_go|$(module_path)|g' main.go)
