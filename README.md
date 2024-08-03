@@ -23,7 +23,7 @@ This manual guides you through setting up the development environment for your G
    Run the following command to generate a basic folder structure for your project:
 
    ```bash
-   make folder_init
+   make setup
    ```
 
 3. **Adjust .env:**

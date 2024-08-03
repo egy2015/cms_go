@@ -9,7 +9,7 @@ name ?= customer
 # Define a variable to hold the module path
 module_path := $(shell go list -m)
 
-.PHONY: folder_init clean retry
+.PHONY: setup clean retry
 
 # Function to retry a command
 define retry
@@ -28,7 +28,7 @@ define retry
 endef
 
 # Target to initialize project folders
-folder_init:
+setup:
 	$(call retry,cp -r builder-maker/router router)
 	$(call retry,cp -r builder-maker/database database)
 	$(call retry,cp -r builder-maker/controller_auth controller)
@@ -105,7 +105,7 @@ resource: temp.txt import_controller.txt
 help:
 	@echo "Usage:"
 	@echo ""
-	@echo " - Add necessary folders / init folder:    make folder_init"
+	@echo " - Add necessary folders / init folder:    make setup"
 	@echo " - Revert adding init folder:              make clean"
 	@echo " - Run the application:                    make run_local"
 	@echo " - Create a new route:                     make resource name="[resourcename]""
