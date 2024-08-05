@@ -14,7 +14,16 @@ import (
 func Run(db database.DB) (err error) {
 	router := gin.Default()
 	router.Use(cors.New(corsConfig))
-	router.GET("/health-check", func(c *gin.Context) {
+	router.GET("", func(c *gin.Context) {
+		db, err := database.Open()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"message": "Failed to connect to database",
+			})
+			return
+		}
+		defer db.Close()
+
 		c.JSON(http.StatusOK, gin.H{
 			"message": "ping-pong!",
 		})
